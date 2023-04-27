@@ -1,0 +1,9 @@
+
+spring:
+  r2dbc:
+    username: user
+    password: password
+    url: r2dbc:postgresql://0.0.0.0:5432/tools-care?timezone=UTC
+logging:
+  level:
+    org.springframework.r2dbc.core: debug
