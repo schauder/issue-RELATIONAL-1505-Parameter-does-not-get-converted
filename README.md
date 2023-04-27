@@ -15,3 +15,22 @@ is `String` or `UUID`. But any other columns?! Nope. Bad grammar.
 > `operator does not exist: uuid = character varying`
 
 The question is how to address this issue (without hacking my way around it).
+
+How to run it:
+
++ Java 20 on classpath
++ Maven 3.9+ on the classpath
++ Docker to spin a PostgreSQL server
+  ```shell
+  docker run \
+    --rm \
+    --network host \
+    --name tools-care \
+    --env POSTGRES_USER=user \
+    --env POSTGRES_DB=tools-care \
+    --env POSTGRES_PASSWORD=password \
+    postgres:alpine
+  ```
++ Make sure that you database setting matches those in the project **application.yaml**
++ Run the app: `mvn spring-boot:run`
++ Follow the stacktrace to the project sources to see/debug
