@@ -44,9 +44,5 @@ public class R2dbcUuidConvertersApplication {
         )).all().blockLast();
     }
 
-    @Table("todos")
-    public record Todo(
-            @Id @Column("id") UUID id,
-            @Column("parent_id") UUID parentId) {
-    }
+
 }
