@@ -20,7 +20,7 @@ class R2dbcUuidConvertersApplicationTests {
 	@BeforeEach
 	void setup() {
 		template.getDatabaseClient()
-				.sql("CREATE TABLE IF NOT EXISTS todos(id UUID NOT NULL PRIMARY KEY, next_id UUID)").then()
+				.sql("CREATE TABLE IF NOT EXISTS todos(id UUID NOT NULL PRIMARY KEY, parent_id UUID)").then()
 				.then().block();
 	}
 
@@ -48,23 +48,45 @@ class R2dbcUuidConvertersApplicationTests {
 	}
 
 	@Test
-	void byNextIdUuid() {
+	void byParentIdUuid() {
 
 		System.out.println("SELECT * FROM todos WHERE next_id = <UUID>");
 		template.select(Todo.class).matching(Query.query(
-				Criteria.where("next_id").is(UUID.fromString(SOME_UUID_STRING))
+				Criteria.where("parentId").is(UUID.fromString(SOME_UUID_STRING))
 		)).all().blockLast();
 
 
 	}
 
 	@Test
-	void byNextIdString() {
+	void byParentIdString() {
 
 
 		System.out.println("SELECT * FROM todos WHERE next_id = <String>");
 		template.select(Todo.class).matching(Query.query(
-				Criteria.where("next_id").is(SOME_UUID_STRING)
+				Criteria.where("parentId").is(SOME_UUID_STRING)
+		)).all().blockLast();
+
+	}
+
+	@Test
+	void byParent_idUuid() {
+
+		System.out.println("SELECT * FROM todos WHERE next_id = <UUID>");
+		template.select(Todo.class).matching(Query.query(
+				Criteria.where("parent_id").is(UUID.fromString(SOME_UUID_STRING))
+		)).all().blockLast();
+
+
+	}
+
+	@Test
+	void byParent_idString() {
+
+
+		System.out.println("SELECT * FROM todos WHERE next_id = <String>");
+		template.select(Todo.class).matching(Query.query(
+				Criteria.where("parent_id").is(SOME_UUID_STRING)
 		)).all().blockLast();
 
 	}
